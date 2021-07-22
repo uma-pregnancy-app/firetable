@@ -15,7 +15,7 @@ import DataGrid, {
 } from "react-data-grid";
 
 import Loading from "components/Loading";
-import TableHeader from "./TableHeader";
+
 import ColumnHeader from "./ColumnHeader";
 import ColumnMenu from "./ColumnMenu";
 import FinalColumnHeader from "./FinalColumnHeader";
@@ -171,11 +171,6 @@ export default function Table() {
         <Hotkeys selectedCell={selectedCell} />
       </Suspense> */}
       <div className={classes.tableWrapper} ref={rowsContainerRef}>
-        <TableHeader
-          rowHeight={rowHeight}
-          updateConfig={tableActions.table.updateConfig}
-        />
-
         {!tableState.loadingColumns ? (
           <DndProvider backend={HTML5Backend}>
             <DataGrid

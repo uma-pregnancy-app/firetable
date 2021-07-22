@@ -30,6 +30,9 @@ const HomePage = lazy(
 const TablePage = lazy(
   () => import("./pages/Table" /* webpackChunkName: "TablePage" */)
 );
+const HeadlessTablePage = lazy(
+  () => import("./pages/HeadlessTable" /* webpackChunkName: "HeadlessTable" */)
+);
 const ImpersonatorAuthPage = lazy(
   () =>
     import(
@@ -84,6 +87,7 @@ export default function App() {
                       path={[
                         routes.home,
                         routes.tableWithId,
+                        routes.headlessTableWithId,
                         routes.tableGroupWithId,
                         routes.gridWithId,
                       ]}
@@ -102,6 +106,10 @@ export default function App() {
                             <PrivateRoute
                               path={routes.tableGroupWithId}
                               render={() => <TablePage />}
+                            />
+                            <PrivateRoute
+                              path={routes.headlessTableWithId}
+                              render={() => <HeadlessTablePage />}
                             />
                           </Switch>
                         </FiretableContextProvider>

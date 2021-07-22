@@ -6,7 +6,6 @@ import { Hidden } from "@material-ui/core";
 
 import Navigation from "components/Navigation";
 import Table from "components/Table";
-import TableHeader from "components/Table/TableHeader";
 import SideDrawer from "components/SideDrawer";
 import TableHeaderSkeleton from "components/Table/Skeleton/TableHeaderSkeleton";
 import HeaderRowSkeleton from "components/Table/Skeleton/HeaderRowSkeleton";
@@ -52,38 +51,30 @@ export default function TablePage() {
     }
   }, [tableCollection]);
 
-  if (!tableState || !tableActions) return null;
-  const rowHeight = tableState.config.rowHeight;
+  if (!tableState) return null;
 
   return (
-    <Navigation tableCollection={tableCollection}>
-      <ActionParamsProvider>
-        {tableState.loadingColumns && (
-          <>
-            <TableHeaderSkeleton />
-            <HeaderRowSkeleton />
-          </>
-        )}
+    // <Navigation tableCollection={tableCollection}>
+    <ActionParamsProvider>
+      {tableState.loadingColumns && (
+        <>
+          <TableHeaderSkeleton />
+          <HeaderRowSkeleton />
+        </>
+      )}
 
-        {!tableState.loadingColumns && !_isEmpty(tableState.columns) && (
-          <>
-            {" "}
-            <TableHeader
-              rowHeight={rowHeight}
-              updateConfig={tableActions.table.updateConfig}
-            />
-            <Table key={tableCollection} />
-          </>
-        )}
+      {!tableState.loadingColumns && !_isEmpty(tableState.columns) && (
+        <Table key={tableCollection} />
+      )}
 
-        {!tableState.loadingColumns && _isEmpty(tableState.columns) && (
-          <EmptyTable />
-        )}
+      {!tableState.loadingColumns && _isEmpty(tableState.columns) && (
+        <EmptyTable />
+      )}
 
-        <Hidden smDown>
+      {/* <Hidden smDown>
           <SideDrawer />
-        </Hidden>
-      </ActionParamsProvider>
-    </Navigation>
+        </Hidden> */}
+    </ActionParamsProvider>
+    // </Navigation>
   );
 }
